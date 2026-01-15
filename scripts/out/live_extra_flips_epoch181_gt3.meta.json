@@ -1,12 +1,12 @@
 {
-  "epoch": 180,
+  "epoch": 181,
   "threshold": 3,
   "baseUrl": "https://api.idena.io/api",
   "counts": {
-    "flipsSeen": 173,
-    "uniqueAuthors": 49,
-    "authorsOverThreshold": 21,
-    "totalExtraFlips": 34
+    "flipsSeen": 14,
+    "uniqueAuthors": 5,
+    "authorsOverThreshold": 0,
+    "totalExtraFlips": 0
   },
   "stake": {
     "fetchStakeOverThresholdEnabled": false,
