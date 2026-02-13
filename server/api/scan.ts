@@ -10,6 +10,7 @@ export default defineEventHandler(async (event) => {
   try {
     const scriptPath = join(process.cwd(), 'scripts', 'flip_extra_flips_live.py')
     const outDir = join(process.cwd(), 'scripts', 'out')
+    const cacheFile = join(process.cwd(), 'scripts', 'cache', 'live_scan_state.json')
     
     // --- STABLE CONFIGURATION ---
     // We force 0. In the Python script logic, 0 means "Auto-detect current live epoch".
@@ -26,11 +27,11 @@ export default defineEventHandler(async (event) => {
     // 2. Command configuration (Windows/Linux compatible)
     const pythonCommand = process.platform === 'win32' ? 'python' : 'python3'
     
-    const command = `${pythonCommand} "${scriptPath}" --epoch ${targetEpoch} --threshold 3 --out-dir "${outDir}"`
+    const command = `${pythonCommand} "${scriptPath}" --epoch ${targetEpoch} --threshold 3 --top 0 --grade-top 10 --grade-top-flips 10 --grade-status Qualified --grade-status WeaklyQualified --min-refresh-seconds 30 --cache-file "${cacheFile}" --out-dir "${outDir}"`
     
     console.log(`🚀 Executing Live Scan: ${command}`)
     
-    await execAsync(command)
+    await execAsync(command, { maxBuffer: 10 * 1024 * 1024 })
 
     // 3. Read results
     const files = await readdir(outDir)

@@ -30,3 +30,5 @@ __pycache__
 # script out
 scripts/out/
 scripts/out/*
+scripts/cache/
+scripts/cache/*
